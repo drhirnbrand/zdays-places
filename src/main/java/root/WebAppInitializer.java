@@ -16,6 +16,11 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import pixelmap.CanvasConfig;
 
+/**
+ * 
+ * @author brin
+ *
+ */
 public class WebAppInitializer implements WebApplicationInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WebAppInitializer.class);
