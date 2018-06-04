@@ -1,4 +1,4 @@
-package pixelmap.canvas;
+package zdays.places.canvas;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import pixelmap.CanvasProperties;
 
 @Component
 public class CanvasManager {

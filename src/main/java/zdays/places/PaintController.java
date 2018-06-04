@@ -1,4 +1,4 @@
-package pixelmap;
+package zdays.places;
 
 import java.text.MessageFormat;
 
@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import zdays.places.canvas.CanvasProperties;
 
 @RestController
 public class PaintController {

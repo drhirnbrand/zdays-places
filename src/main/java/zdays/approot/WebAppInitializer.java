@@ -1,4 +1,4 @@
-package root;
+package zdays.approot;
 
 import java.util.Set;
 
@@ -8,13 +8,14 @@ import javax.servlet.ServletRegistration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import pixelmap.CanvasConfig;
+import zdays.places.PlacesConfig;
 
 /**
  * 
@@ -40,10 +41,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		container.addListener(new ContextLoaderListener(context));
 		container.setInitParameter("defaultHtmlEscape", "true");
 
-		AnnotationConfigWebApplicationContext servletContext = getContext(CanvasConfig.class);
+		AnnotationConfigWebApplicationContext servletContext = getContext(PlacesConfig.class);
 
 		servletContext.setParent(context);
-		servletContext.register(CanvasConfig.class);
+		servletContext.register(PlacesConfig.class);
 		// container.addListener(new ContextLoaderListener(servletContext));
 
 		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher",

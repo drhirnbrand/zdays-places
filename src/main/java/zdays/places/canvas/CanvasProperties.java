@@ -1,4 +1,4 @@
-package pixelmap;
+package zdays.places.canvas;
 
 import java.io.File;
 

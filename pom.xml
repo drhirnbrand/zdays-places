@@ -12,6 +12,7 @@
 
 	<properties>
 		<spring.version>5.0.6.RELEASE</spring.version>
+		<jackson.version>2.9.4</jackson.version>
 		<java.version>1.8</java.version>
 		<build.sourceEncoding>UTF-8</build.sourceEncoding>
 		<reporting.outputEncoding>UTF-8</reporting.outputEncoding>
@@ -47,9 +48,33 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.4</version>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
@@ -103,6 +128,53 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.6.8</version>
+				<configuration>
+
+					<!-- Container configuration -->
+					<container>
+						<containerId>tomcat7x</containerId>
+						<zipUrlInstaller>
+							<url>http://repo1.maven.org/maven2/org/apache/tomcat/tomcat/7.0.68/tomcat-7.0.68.zip</url>
+						</zipUrlInstaller>
+						<!-- Instead of downloading the container, you can also reuse an existing 
+							installation by settings its directory: <home>C:/Program Files/Apache/Apache 
+							Tomcat 7.0.68</home> -->
+						<output>${project.build.directory}/tomcat7x/container.log</output>
+						<append>false</append>
+						<log>${project.build.directory}/tomcat7x/cargo.log</log>
+					</container>
+
+					<!-- Configuration to use with the container or the deployer -->
+					<configuration>
+						<type>standalone</type>
+						<home>${project.build.directory}/tomcat7x</home>
+						<properties>
+							<cargo.servlet.port>8080</cargo.servlet.port>
+							<cargo.logging>high</cargo.logging>
+						</properties>
+					</configuration>
+					<deployables>
+						<deployable>
+							<groupId>war group id</groupId>
+							<artifactId>war artifact id</artifactId>
+							<type>war</type>
+							<properties>
+								<context>optional root context</context>
+							</properties>
+						</deployable>
+						<deployable>
+							<groupId>ear group id</groupId>
+							<artifactId>ear artifact id</artifactId>
+							<type>ear</type>
+						</deployable>
+<!-- 						[...] -->
+					</deployables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -1,9 +1,8 @@
-package pixelmap.canvas;
+package zdays.places.canvas;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.awt.image.WritableRaster;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,20 +38,29 @@ public class Canvas {
 	 * @param image
 	 */
 	private void dumbCopy(BufferedImage sourceImage, BufferedImage targetImage) {
-		int height = sourceImage.getHeight();
 		int width = sourceImage.getWidth();
+		int height = sourceImage.getHeight();
 
+		LOG.info("Source image is {} x {}", width, height);
 		height = Math.min(height, targetImage.getHeight());
 		width = Math.min(width, targetImage.getWidth());
 
-		int[] buffer = new int[width * height];
+		LOG.info("Copy size is {} x {}", width, height);
 
-		WritableRaster sourceRaster = sourceImage.getRaster();
-		int[] pixels = sourceRaster.getPixels(0, 0, width, height, buffer);
+		// int[] buffer = new int[(width * height) + 1];
+		//
+		// WritableRaster sourceRaster = sourceImage.getRaster();
+		// int[] pixels = sourceRaster.getPixels(0, 0, width, height, buffer);
+		//
+		// WritableRaster targetRaster = image.getRaster();
+		// targetRaster.setPixels(0, 0, width, height, pixels);
 
-		WritableRaster targetRaster = image.getRaster();
-		targetRaster.setPixels(0, 0, width, height, pixels);
-
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				int rgb = sourceImage.getRGB(x, y);
+				targetImage.setRGB(x, y, rgb);
+			}
+		}
 	}
 
 }

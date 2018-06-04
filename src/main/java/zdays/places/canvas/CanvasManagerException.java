@@ -1,4 +1,4 @@
-package pixelmap.canvas;
+package zdays.places.canvas;
 
 public class CanvasManagerException extends Exception {
 
